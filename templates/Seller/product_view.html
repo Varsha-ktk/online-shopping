@@ -1,0 +1,32 @@
+{% extends 'Seller/seller_base.html' %}
+{% block content %}
+<h3>Total products</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product name</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Price</th>
+        <th scope="col">Image</th>
+      <th scope="col">Description</th>
+      <th scope="col">Delete</th>
+       <th scope="col">Change product details</th>
+    </tr>
+  </thead>
+    <tbody>
+  {% for i in data1 %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{i.product_name}}</td>
+      <td>{{i.brand}}</td>
+      <td>{{i.price}}</td>
+      <td><img src="{{i.image.url}}" ></td>
+      <td>{{i.description}}</td>
+      <td><a href="{% url 'product_delete' i.id %}" class="btn btn-danger">Delete</a></td>
+      <td><a href="{% url 'product_update' i.id %}" class="btn btn-warning">update</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

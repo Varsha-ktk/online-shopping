@@ -1,0 +1,10 @@
+{% extends 'Seller/seller_base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+<form method="POST"  enctype="multipart/form-data">
+      {% csrf_token %}
+    {{data1|crispy}}
+     {{data2|crispy}}
+    <button type="submit">Add product</button>
+</form>
+{% endblock %}
