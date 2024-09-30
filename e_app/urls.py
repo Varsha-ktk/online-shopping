@@ -4,7 +4,7 @@ from e_app import views, admin_views, seller_views, customer_views
 
 urlpatterns=[
     path('',views.home,name='home'),
-    path('login',views.Login,name='login'),
+
     path('pluto',views.pluto,name='pluto'),
     path('corona',views.corona,name='corona'),
 
@@ -15,6 +15,7 @@ urlpatterns=[
     path('customer',views.customer, name='customer'),
     path('seller', views.seller, name='seller'),
     path('login_view',views.login_view, name='login_view'),
+    path('logout_view', views.logout_view, name='logout_view'),
 
 
 
@@ -22,6 +23,7 @@ urlpatterns=[
 
     path('admin_customerview',admin_views.admin_customerview,name='admin_customerview'),
     path('admin_sellerview', admin_views.admin_sellerview, name='admin_sellerview'),
+    path('admin_productview', admin_views.admin_productview, name='admin_productview'),
 
     path('seller_delete/<int:id>/',admin_views.seller_delete,name='seller_delete'),
     path('customer_delete/<int:id>/', admin_views.customer_delete, name='customer_delete'),
@@ -37,10 +39,13 @@ urlpatterns=[
 
     #customer
     path('customer_productview',customer_views.customer_productview,name='customer_productview'),
-
-
-
-
+    path('buyproduct/<int:id>/', customer_views.buy_product, name='buyproduct'),
+    path('orders', customer_views.orders, name='orders'),
+    path('cart/<int:id>/', customer_views.add_to_cart, name='cart'),
+    path('cart_view', customer_views.cart_view, name='cart_view'),
+    path('remove_product/<int:id>/', customer_views.remove_product, name='remove_product'),
+    path('cart_buy/<int:id>/', customer_views.cart_buy, name='cart_buy'),
+    path('cancel_order/<int:id>/', customer_views.cancel_order, name='cancel_order'),
 
 
 

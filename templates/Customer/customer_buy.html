@@ -1,0 +1,15 @@
+{% extends 'Customer/customer_base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<!--   {{form|crispy}}-->
+
+     <input type="number" class="form-control" name="count"  value="" placeholder="quantity" required>
+                    <label class="form-label">quantity</label>
+
+    <button type="submit"   class="btn btn-warning">Buy</button>
+</form>
+
+{% endblock %}

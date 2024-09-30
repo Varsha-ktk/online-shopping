@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from e_app.filter import BrandFilter
 from e_app.forms import ProductForm
 from e_app.models import Seller, Product
 
 
+@login_required(login_url='login_view')
 def product(request):
     seller = request.user   #  to get user id
     print(seller)
@@ -19,21 +22,27 @@ def product(request):
             form1.save()
             return redirect('product_view')
     return render(request,'Seller/product.html',{'data1':data})
-
+@login_required(login_url='login_view')
 def product_view(request):
     user=request.user #user id
     obj = Seller.objects.get(user=user) #obj id in seller table
     data1 = Product.objects.filter(user=obj)
+
+
+    brandFilter = BrandFilter(request.GET, queryset=data1)
+    data1 = brandFilter.qs
+
     print(obj.id)
     print(user.id)
     print(data1)
-    return render(request,'Seller/product_view.html',{'data1':data1})
-
+    return render(request,'Seller/product_view.html',{'data1':data1,'brandFilter':brandFilter})
+@login_required(login_url='login_view')
 def product_delete(request,id):
     data=Product.objects.get(id=id)
     data.delete()
     return redirect('product_view')
 
+@login_required(login_url='login_view')
 def product_update(request,id):
     data=Product.objects.get(id=id)
     form=ProductForm(instance=data)
@@ -44,4 +53,3 @@ def product_update(request,id):
         return redirect('product_view')
 
     return render(request,'seller/product_update.html',{'form':form})
-

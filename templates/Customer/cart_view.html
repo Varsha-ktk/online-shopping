@@ -1,0 +1,21 @@
+{% extends 'Customer/customer_base.html' %}
+
+{% block content %}
+<div class="row">
+    {% for i in data %}
+    <div class="col-md-3 mb-3">
+        <div class="card" style="background-color: white; color: black; margin: 2px; border-radius: 8px; font-family: Garamond; height: 380px;">
+            <img src="{{ i.product.image.url }}" style=" height: 150px; width: 181px; margin: 22px;" class="card-img-top img" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.product.product_name }}</h5>
+                <p class="card-text">Price: {{ i.product.price }}<br><b>Product details:</b><br>{{ i.product.description }}</p>
+                <a  href="{% url 'cart_buy' i.id %}"  class="btn btn-primary" >Buy</a>
+                <a type ='submit' href="{% url 'remove_product' i.id %}"  class="btn btn-primary" >Remove</a>
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

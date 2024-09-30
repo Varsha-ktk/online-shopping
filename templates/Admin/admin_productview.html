@@ -1,0 +1,31 @@
+{%  extends 'Admin/admin_base.html' %}
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">product name</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">Description</th>
+      <th scope="col">Seller</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in data %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{i.product_name}}</td>
+      <td>{{i.brand}}</td>
+      <td>{{i.price}}</td>
+      <td><img src="{{i.image.url}}"></td>
+      <td>{{i.description}}</td>
+      <td>{{i.user.name}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

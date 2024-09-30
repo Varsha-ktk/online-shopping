@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from e_app.models import Login_view, Customer, Seller, Product
+from e_app.models import Login_view, Customer, Seller, Product, Buy, Cart
 
 
 class LoginForm(UserCreationForm):
@@ -29,6 +29,22 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
         exclude = ('user',)
+class BuyForm(forms.ModelForm):
+
+    class Meta:
+        model = Buy
+        fields = '__all__'
+        # exclude = ('user','product')
+
+class AddtocartForm(forms.ModelForm):
+
+    class Meta:
+        model = Cart
+        fields = '__all__'
+
+
+
+
 
 
 

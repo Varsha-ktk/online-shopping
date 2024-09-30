@@ -24,6 +24,18 @@ class Product(models.Model):
     price = models.IntegerField()
     image = models.FileField(upload_to='documents/')
     description = models.TextField()
+class Buy(models.Model):
+    user = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    product=models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    quantity=models.IntegerField()
+
+class Cart(models.Model):
+    user = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+
+
+
+
 
 
 

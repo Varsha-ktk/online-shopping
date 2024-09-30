@@ -1,5 +1,6 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from e_app.forms import SellerForm, CustomerForm, LoginForm, ProductForm
@@ -9,20 +10,22 @@ from e_app.models import Customer, Seller, Product
 # Create your views here.
 def home(request):
     return render(request,'home.html')
-def Login(request):
-    return render(request,'login.html')
+
 def pluto(request):
     return render(request,'pluto1.html')
 def corona(request):
     return render(request,'corona.html')
 
+@login_required(login_url='login_view')
 def adminbase(request):
     return render(request, 'Admin/admin_base.html')
 
 
-
+@login_required(login_url='login_view')
 def customerbase(request):
     return render(request,'Customer/customer_base.html')
+
+@login_required(login_url='login_view')
 def sellerbase(request):
     return render(request,'Seller/seller_base.html')
 
@@ -44,6 +47,7 @@ def customer(request):
 
     return render(request,'regster_base.html',{'form1':data1,'form2':data2})
 
+@login_required(login_url='login_view')
 def seller(request):
 
     data1 = LoginForm()
@@ -79,6 +83,11 @@ def login_view(request):
         else:
             messages.info(request,'invalid credential')
     return render(request,'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login_view')
+
 
 
 
